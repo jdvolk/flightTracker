@@ -73,9 +73,9 @@ h1 {
   background: $light-blue;
   border-radius: 20px;
   box-shadow: 4px 7px 13px 0px #000000c2, inset 4px 7px 13px 0px #50a4ca;
-}
-.login-box input[type="button"] :hover {
-  cursor: pointer;
-  background: white;
-  color: $light-blue;
+  &:hover {
+    cursor: pointer;
+    box-shadow: inset 3px 4px 7px 0px #007681cb, inset -4px -4px 5px 0px #50a4ca, 
+  }
+  
 }
