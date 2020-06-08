@@ -91,12 +91,23 @@ describe('Agency', () => {
 
   describe('new trip requests', () => {
     beforeEach(() => {
-      let execution = agency.newTripRequests(tripData)
+      // let execution = agency.newTripRequests(tripData)
       
     })
     it('should filter all pending trips', () => {
+      let execution = agency.newTripRequests(tripData)
       expect(execution).to.eql(
       [
+        {
+          "id": 2,
+          "userID": 35,
+          "destinationID": 25,
+          "travelers": 5,
+          "date": "2020/10/04",
+          "duration": 18,
+          "status": "pending",
+          "suggestedActivities": []
+        },
         {
           "id": 3,
           "userID": 3,
@@ -121,18 +132,66 @@ describe('Agency', () => {
       let sadPath = agency.newTripRequests()
       expect(sadPath).to.equal(null)
     })
-    it.skip('should return a string if no pending trips', () => {
-
+    it('should return a string if no pending trips', () => {
+      let noPendingData = [
+        {
+          "id": 5,
+          "userID": 42,
+          "destinationID": 29,
+          "travelers": 3,
+          "date": "2020/04/30",
+          "duration": 18,
+          "status": "approved",
+          "suggestedActivities": []
+        }]
+      let execution = agency.newTripRequests(noPendingData)
+      expect(execution).to.equal('You Have No Pending Trips')
     })
   })
   describe('total income this year', () => {
+    it.skip('', () => {
+      
+    })
+    it.skip('', () => {
 
+    })
+    it.skip('', () => {
+
+    })
+    it.skip('', () => {
+
+    })
+  })
+  describe('filter trips on a date', () => {
+    it('should filter trip data for date and return array of travelers', () => {
+      let execution = agency.filterTripsOnDate(tripData, '2020/06/07') 
+      expect(execution).to.eql([
+        {
+          "date": "2020/06/07",
+          "destinationID": 3,
+          "duration": 9,
+          "id": 1591562556483,
+          "status": "approved",
+          "suggestedActivities": [],
+          "travelers": 1,
+          "userID": 50,
+        }
+      ])
+    })
+    it('should return null if not passed data', () => {
+      let sadPath = agency.filterTripsOnDate()
+      expect(sadPath).to.equal(null)
+    })
+    it('should return null if passed string', () => {
+      let sadPath = agency.filterTripsOnDate('garbage')
+      expect(sadPath).to.equal(null)
+    })
   })
   describe('travelers on trips today', () => {
     beforeEach(() => {
-      let execution = agency.travelersOnTripsToday(tripData) 
     })
     it('should filter trip data for date and return array of travelers', () => {
+      let execution = agency.travelersOnTripsToday(tripData, '2020/06/07') 
       expect(execution).to.eql([50])
     })
     it('should return null if not passed data', () => {
@@ -143,8 +202,9 @@ describe('Agency', () => {
       let sadPath = agency.travelersOnTripsToday('garbage')
       expect(sadPath).to.equal(null)
     })
-    it.skip('should return string if no travelers on trips today', () => {
-      
+    it('should return string if no travelers on trips today', () => {
+      let execution = agency.travelersOnTripsToday(tripData, '2020/0/07') 
+      expect(execution).to.equal('There are no travelers on trips today')
     })
   })
 })
