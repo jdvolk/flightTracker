@@ -27,7 +27,7 @@ let pass = document.querySelector('.pass');
 loginButton.addEventListener('click', login)
 
 async function login(event) {
-  await DataRepo.getAllData();
+  // DataRepo.getAllData();
   event.preventDefault();
   let user = await validateLogin(userName.value, pass.value);
   // trigger class of hidden on login page 
