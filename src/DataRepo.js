@@ -13,7 +13,7 @@ export default class DataRepo {
     return json;
   }
 
-  async getAllData(){
+  async getAllData() {
     let travelers = await this.getData('travelers');
     let trips = await this.getData('trips')
     let destinations = await this.getData('destinations')
