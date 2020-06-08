@@ -4,17 +4,19 @@ const travelerSection = document.querySelector(".traveler-homepage")
 export default {
 
   hideLogin() {
-    debugger
     loginBox.classList.toggle('hidden')
   },
+  toggleTraveler() {
+    travelerSection.classList.toggle('hidden')
+  },
   toggleAgency() {
-    debugger
     agencySection.classList.toggle('hidden')
+  },
+  updateTravelerHomepage() {
 
   },
-  toggleTraveler() {
-    debugger
-    travelerSection.classList.toggle('hidden')
-  }
+  updateAgencyHomepage(){
+
+  },
 
 }
