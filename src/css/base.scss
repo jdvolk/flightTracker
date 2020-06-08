@@ -64,7 +64,7 @@ h1 {
   border-radius: 30px;
   width: 330px;
 }
-.login-box input[type="button"] {
+.login-box input[type="submit"] {
   border: none;
   outline: none;
   height: 40px;
@@ -74,8 +74,12 @@ h1 {
   border-radius: 20px;
   box-shadow: 4px 7px 13px 0px #000000c2, inset 4px 7px 13px 0px #50a4ca;
   &:hover {
+    text-shadow: 1px 1px 3px black;
     cursor: pointer;
     box-shadow: inset 3px 4px 7px 0px #007681cb, inset -4px -4px 5px 0px #50a4ca, 
   }
   
+}
+.hidden {
+  display: none;
 }
