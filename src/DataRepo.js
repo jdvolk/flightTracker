@@ -17,9 +17,9 @@ export default class DataRepo {
     let travelers = await this.getData('travelers');
     let trips = await this.getData('trips')
     let destinations = await this.getData('destinations')
-    this.travelers = travelers;
-    this.trips = trips;
-    this.destinations = destinations;
+    this.travelers = travelers.travelers;
+    this.trips = trips.trips;
+    this.destinations = destinations.destinations;
   }
 
 }

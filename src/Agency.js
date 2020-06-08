@@ -7,9 +7,9 @@ class Agency {
 
   }
   totalIncomeThisYear() {
-
+    // get
   }
-  travelersOnTripsToday(date, trips) {
+  travelersOnTripsToday(trips) {
 
   }
 }
