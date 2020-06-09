@@ -8,7 +8,7 @@ describe('traveler', () => {
     tripData = [
       {
           "id": 1,
-          "userID": 44,
+          "userID": 1,
           "destinationID": 49,
           "travelers": 1,
           "date": "2019/09/16",
@@ -18,7 +18,7 @@ describe('traveler', () => {
       },
       {
           "id": 2,
-          "userID": 35,
+          "userID": 1,
           "destinationID": 25,
           "travelers": 5,
           "date": "2020/06/04",
@@ -28,7 +28,7 @@ describe('traveler', () => {
       },
       {
           "id": 3,
-          "userID": 3,
+          "userID": 1,
           "destinationID": 22,
           "travelers": 4,
           "date": "2020/06/05",
@@ -38,7 +38,7 @@ describe('traveler', () => {
       },
       {
           "id": 4,
-          "userID": 43,
+          "userID": 1,
           "destinationID": 14,
           "travelers": 2,
           "date": "2020/06/25",
@@ -48,7 +48,7 @@ describe('traveler', () => {
       },
       {
           "id": 5,
-          "userID": 42,
+          "userID": 1,
           "destinationID": 29,
           "travelers": 3,
           "date": "2020/04/30",
@@ -58,7 +58,7 @@ describe('traveler', () => {
       },
       {
           "id": 6,
-          "userID": 29,
+          "userID": 1,
           "destinationID": 35,
           "travelers": 3,
           "date": "2020/06/06",
@@ -68,7 +68,17 @@ describe('traveler', () => {
       },
       {
         id: 1591562556483,
-        userID: 50, 
+        userID: 1, 
+        destinationID: 3, 
+        travelers: 1, 
+        date: "2020/06/07",
+        "duration": 9,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        id: 159156,
+        userID: 3, 
         destinationID: 3, 
         travelers: 1, 
         date: "2020/06/07",
@@ -129,14 +139,98 @@ describe('traveler', () => {
   it('should be an instance of Traveler', () => {
     expect(traveler).to.be.an.instanceof(Traveler)
   })
-  it('should have default property of agency', () => {
+  it('should have default property of traveler', () => {
     expect(traveler.type).to.equal('traveler')
+  })
+  it('should have property of id', () => {
+    expect(traveler.id).to.equal(1)
+  })
+  it('should have name', () => {
+    expect(traveler.name).to.equal("Ham Leadbeater")
+  })
+  it('should have travelerType', () => {
+    expect(traveler.travelerType).to.equal("relaxer")
+  })
+  describe('filter trips from id', () => {
+    it.skip('should filter trips from an id', () => {
+      let execution = traveler.filterTripsFromId(tripData, traveler.id)
+      expect(execution).to.eql(
+        [
+        {
+            "id": 1,
+            "userID": 1,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2019/09/16",
+            "duration": 8,
+            "status": "approved",
+            "suggestedActivities": []
+        },
+        {
+            "id": 2,
+            "userID": 1,
+            "destinationID": 25,
+            "travelers": 5,
+            "date": "2020/06/04",
+            "duration": 18,
+            "status": "pending",
+            "suggestedActivities": []
+        },
+        {
+            "id": 3,
+            "userID": 1,
+            "destinationID": 22,
+            "travelers": 4,
+            "date": "2020/06/05",
+            "duration": 17,
+            "status": "approved",
+            "suggestedActivities": []
+        },
+        {
+            "id": 4,
+            "userID": 1,
+            "destinationID": 14,
+            "travelers": 2,
+            "date": "2020/06/25",
+            "duration": 10,
+            "status": "approved",
+            "suggestedActivities": []
+        },
+        {
+            "id": 5,
+            "userID": 1,
+            "destinationID": 29,
+            "travelers": 3,
+            "date": "2020/04/30",
+            "duration": 18,
+            "status": "approved",
+            "suggestedActivities": []
+        },
+        {
+            "id": 6,
+            "userID": 1,
+            "destinationID": 35,
+            "travelers": 3,
+            "date": "2020/06/06",
+            "duration": 9,
+            "status": "approved",
+            "suggestedActivities": []
+        },
+        {
+          id: 1591562556483,
+          userID: 1, 
+          destinationID: 3, 
+          travelers: 1, 
+          date: "2020/06/07",
+          "duration": 9,
+          "status": "approved",
+          "suggestedActivities": []
+        }]
+      )
+    })
   })
   describe('filter past/present/future/pending trips', () => {
     
-  })
-  describe('', () => {
-
   })
   describe('', () => {
 
