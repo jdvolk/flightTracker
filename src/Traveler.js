@@ -8,27 +8,63 @@ class Traveler {
     this.type = UserTypeTraveler;
   }
   filterTripsFromId(trips, id) {
-    let allTrips = trips.filter(trip => trip.userID === id)
-    return allTrips;
+    if(typeof trips === 'object' && typeof id === 'number') {
+      let allTrips = trips.filter(trip => trip.userID === id)
+      return allTrips;
+    }
+    return null
   }
   filterPastTrips(trips){
     let today = moment();
-    allTrips = this.filterTripsFromId(trips, this.id)
-    let pastTrips = allTrips.filter(trips => {
-      return moment(trip.date).add(trip.duration, 'days').isBefore(today)
-    })
-    let activeTrips = allTrips.filter(trip => {
-      let start = trip.date
-      let startFormatted = moment(start, 'YYYY-MM-DD')
-      let end = moment(start, 'YYYY-MM-DD').add(trip.duration,'days')
-      return moment(today).isBetween(startFormatted, end)
-    })
-    let upComingTrips = allTrips.filter(trip => {
-      return moment(trip.date, 'YYYY-MM-DD').isAfter(today)
-    })
-    let pendingTrips = allTrips.filter(trip => {
-     return trip.status === 'pending'
-    })
+    if(typeof trips === 'object') {
+      let allTrips = this.filterTripsFromId(trips, this.id)
+      let pastTrips = allTrips.filter(trip => {
+        return moment(trip.date, 'YYYY-MM-DD').add(trip.duration, 'days').isBefore(today)
+      })
+      return pastTrips
+    }
+    return null
+  }
+  filterActiveTrips(trips) {
+    let today = moment();
+    if(typeof trips === 'object') {
+      let allTrips = this.filterTripsFromId(trips, this.id)
+      let activeTrips = allTrips.filter(trip => {
+        let start = trip.date
+        let startFormatted = moment(start, 'YYYY-MM-DD')
+        let end = moment(start, 'YYYY-MM-DD').add(trip.duration,'days')
+        return moment(today).isBetween(startFormatted, end)
+      })
+      return activeTrips
+    }
+    return null
+  }
+  filterUpComingTrips(trips){
+    let today = moment();
+    if(typeof trips === 'object') {
+      let allTrips = this.filterTripsFromId(trips, this.id)
+      let upComingTrips = allTrips.filter(trip => {
+        return moment(trip.date, 'YYYY-MM-DD').isAfter(today)
+      })
+      return upComingTrips
+    }
+    return null
+  }
+  filterPendingTrips(trips) {
+    if(typeof trips === 'object') {
+      let allTrips = this.filterTripsFromId(trips, this.id)
+      let pendingTrips = allTrips.filter(trip => {
+      return trip.status === 'pending'
+      })
+      return pendingTrips
+    }
+    return null
+  }
+  filterTravelerTrips(trips) {
+    let pastTrips = this.filterPastTrips(trips);
+    let activeTrips = this.filterActiveTrips(trips);
+    let upComingTrips = this.filterUpComingTrips(trips);
+    let pendingTrips = this.filterPendingTrips(trips)
     let result = {
       'pastTrips': pastTrips,
       'activeTrips' : activeTrips,
@@ -36,27 +72,24 @@ class Traveler {
       'pendingTrips' : pendingTrips,
     }
     return result;
+  }
     /*
     All of my trips (past, present, upcoming and pending)
     */
+   returnCostOfTrip(trip, destinations){
+    let currentDestination = destinations.find(destination => destination.id === trip.destinationID);
+    if(currentDestination === undefined) return 0
+    let costOfLodge = currentDestination.estimatedLodgingCostPerDay * trip.travelers 
+    let costOfFlight =  currentDestination.estimatedFlightCostPerPerson * trip.travelers
+    return costOfFlight + costOfLodge;
   }
 
-  returnTotalAmountSpent() {
-    /*
-    Total amount I have spent on trips this year. 
-    This should be calculated from the trips data 
-    and include a travel agent’s 10% fee
-    */
-    // take in trip data
-    // date in destination data
-    // filter out all the trips using method above 
-    // reduce/for each item in the filtered data
-      // take the cost per person from the destination data, 
-      // multiply that by the amount of people on the trip
-      // add that to the acc
-      // return the acc * .10
-
+  returnTotalAmountSpent(trips, destinations) {
+    let allTrips = this.filterTripsFromId(trips, this.id);
+    let totalSpent = allTrips.reduce((totalSpent, trip) => {
+      return totalSpent += this.returnCostOfTrip(trip, destinations)  
+    }, 0)
+    return (Math.round((totalSpent * 1.1) * 100)/100)
   }
-
 }
 export {Traveler, UserTypeTraveler}
