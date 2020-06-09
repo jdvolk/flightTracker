@@ -12,7 +12,7 @@ const validateLogin = async (username, password) => {
     if(id === 'agency') {
       return new Agency()
     } else {
-      return new Traveler()
+      return new Traveler(travelerData(id))
     }
   }
 }
@@ -27,5 +27,12 @@ const ifExists = async (id) => {
     const response = await fetch(url + id)
 
     return response.status === 200
+}
+const travelerData = async (id) => {
+    const url = 'https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/'
+    const response = await fetch(url + id)
+    const json = await response.json()
+
+    return json
 }
 export default validateLogin

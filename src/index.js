@@ -34,11 +34,9 @@ async function login(event) {
   if(user.type === UserTypeTraveler) {
     // trigger hope page if user is traveler
     DomUpdates.toggleTraveler()
-    DomUpdates.hideLogin()
   } else if (user.type === UserTypeAgency) {
     // trigger home page if user is agency
     DomUpdates.toggleAgency();
-    DomUpdates.hideLogin()
   } else {
     // error for failed login
     console.log('error')
