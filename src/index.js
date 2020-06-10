@@ -54,10 +54,13 @@ function displayTravelerHomepage() {
   DomUpdates.displayAmountSpent(totalAmountSpent)
 }
 function displayAgencyHomepage() {
-  let totalAmountEarned = user.totalIncomeThisYear(dataRepo.trips, dataRepo.destinations)
-  DomUpdates.displayPendingTrips()
-  DomUpdates.displayTravelersOnTrips()
-  DomUpdates.displayTotalAmountEarned()
+  let amountEarned = user.totalIncomeThisYear(dataRepo.trips, dataRepo.destinations)
+  // debugger
+  let newTripRequests = user.newTripRequests(dataRepo.trips)
+  let travelersOnTrips = user.activeTrips(dataRepo.trips)
+  DomUpdates.displayAgencyAmountEarned(amountEarned)
+  DomUpdates.displayActiveTrips(travelersOnTrips, dataRepo.destinations, dataRepo.travelers)
+  DomUpdates.displayTripRequests(newTripRequests, dataRepo.destinations, dataRepo.travelers)
 
 }
 
