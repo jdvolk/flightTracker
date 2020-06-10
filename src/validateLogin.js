@@ -3,6 +3,7 @@ import {Agency, UserTypeAgency} from './Agency'
 
 const validateLogin = async (username, password) => {
   let isPassword = password === "travel2020"
+  if(!isPassword) alert("Invalid Username or Password")
   let id = getId(username);
   if(typeof id === "number") {
     let exists = await ifExists(id)

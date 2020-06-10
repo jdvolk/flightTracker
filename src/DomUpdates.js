@@ -19,9 +19,7 @@ function getUserForId(id, users) {
   return users.find(user => user.id === id)
 }
 
-
 export default {
-
   hideLogin() {
     loginBox.classList.toggle('hidden')
   },
@@ -82,6 +80,7 @@ export default {
   },
   activeTripHtml(trip, destination, user, section) {
     section.innerHTML += `<li> ${user.name} is in ${destination.destination}</li>`
+    section.innerText += "\n"
   },
   displayTripRequests(trips, destinations, users) {
     trips.forEach(trip => {
@@ -91,12 +90,8 @@ export default {
     })
   },
   pendingRequestHtml(trip, destination, user, section) {
-    section.innerHTML += `<li>${user.name} wants to go to ${destination.destination}</li>`
+    section.innerHTML += `<li> ${user.name} to ${destination.destination}</li>`
+    section.innerText += "\n"
 
   }
-  
-  // DomUpdates.displayTotalAmountEarned(amountEarned)
-  // DomUpdates.displayTripRequests(newTripRequests)
-  // DomUpdates.displayTravelersOnTrips(travelersOnTrips)
-
 }

@@ -29,21 +29,15 @@ let user;
 async function login(event) {
   event.preventDefault();
   await dataRepo.getAllData();
-  // DataRepo.getAllData();
   user = await validateLogin(userName.value, pass.value);
-  // trigger class of hidden on login page 
   if(user.type === UserTypeTraveler) {
-    // trigger hope page if user is traveler
     DomUpdates.toggleTraveler()
     displayTravelerHomepage();
-    // return user
   } else if (user.type === UserTypeAgency) {
-    // trigger home page if user is agency
     DomUpdates.toggleAgency();
     displayAgencyHomepage()
-    // return user
   } else {
-    // error for failed login
+    throw "Invalid Username and Password"
     console.log('error')
   }
 }
@@ -55,7 +49,6 @@ function displayTravelerHomepage() {
 }
 function displayAgencyHomepage() {
   let amountEarned = user.totalIncomeThisYear(dataRepo.trips, dataRepo.destinations)
-  // debugger
   let newTripRequests = user.newTripRequests(dataRepo.trips)
   let travelersOnTrips = user.activeTrips(dataRepo.trips)
   DomUpdates.displayAgencyAmountEarned(amountEarned)
