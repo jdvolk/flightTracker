@@ -17,8 +17,7 @@ class Traveler {
   filterPastTrips(trips){
     let today = moment();
     if(typeof trips === 'object') {
-      let allTrips = this.filterTripsFromId(trips, this.id)
-      let pastTrips = allTrips.filter(trip => {
+      let pastTrips = trips.filter(trip => {
         return moment(trip.date, 'YYYY-MM-DD').add(trip.duration, 'days').isBefore(today)
       })
       return pastTrips
@@ -28,8 +27,7 @@ class Traveler {
   filterActiveTrips(trips) {
     let today = moment();
     if(typeof trips === 'object') {
-      let allTrips = this.filterTripsFromId(trips, this.id)
-      let activeTrips = allTrips.filter(trip => {
+      let activeTrips = trips.filter(trip => {
         let start = trip.date
         let startFormatted = moment(start, 'YYYY-MM-DD')
         let end = moment(start, 'YYYY-MM-DD').add(trip.duration,'days')
@@ -42,8 +40,7 @@ class Traveler {
   filterUpComingTrips(trips){
     let today = moment();
     if(typeof trips === 'object') {
-      let allTrips = this.filterTripsFromId(trips, this.id)
-      let upComingTrips = allTrips.filter(trip => {
+      let upComingTrips = trips.filter(trip => {
         return moment(trip.date, 'YYYY-MM-DD').isAfter(today)
       })
       return upComingTrips
@@ -52,8 +49,7 @@ class Traveler {
   }
   filterPendingTrips(trips) {
     if(typeof trips === 'object') {
-      let allTrips = this.filterTripsFromId(trips, this.id)
-      let pendingTrips = allTrips.filter(trip => {
+      let pendingTrips = trips.filter(trip => {
       return trip.status === 'pending'
       })
       return pendingTrips
@@ -61,10 +57,11 @@ class Traveler {
     return null
   }
   filterTravelerTrips(trips) {
-    let pastTrips = this.filterPastTrips(trips);
-    let activeTrips = this.filterActiveTrips(trips);
-    let upComingTrips = this.filterUpComingTrips(trips);
-    let pendingTrips = this.filterPendingTrips(trips)
+    let allTrips = this.filterTripsFromId(trips, this.id)
+    let pastTrips = this.filterPastTrips(allTrips);
+    let activeTrips = this.filterActiveTrips(allTrips);
+    let upComingTrips = this.filterUpComingTrips(allTrips);
+    let pendingTrips = this.filterPendingTrips(allTrips)
     let result = {
       'pastTrips': pastTrips,
       'activeTrips' : activeTrips,

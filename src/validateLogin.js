@@ -12,7 +12,8 @@ const validateLogin = async (username, password) => {
     if(id === 'agency') {
       return new Agency()
     } else {
-      return new Traveler(travelerData(id))
+      let traveler = new Traveler(await travelerData(id))
+      return traveler
     }
   }
 }

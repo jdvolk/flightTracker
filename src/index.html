@@ -4,7 +4,7 @@
     <title>Webpack Starter Kit</title>
   </head>
   <body>
-    <section class="login-box ">
+    <section class="login-box">
       <img src="./images/login-avatar.svg" class='avatar'>
       <h1>Login</h1>
       <form class="login-form">
@@ -16,10 +16,20 @@
       </form>
     </section>
     <section class="traveler-homepage hidden">
-      <section class="welcome-bar"></section>
-      <section class="traveler-grid"></section>
+      <!-- <section class="welcome-bar"></section> -->
+      <section class="traveler-grid hidden">
+        <section class="past-trips widget"><h2>Past Trips:</h2><ul></ul></section>
+        <section class="traveler-pending-trips widget"><h2>Pending Trips</h2><ul></ul></section>
+        <section class="upcoming-trips widget"><h2>Up-Coming Trips</h2><ul></ul></section>
+        <section class="present-trips widget"><h2>Present Trips</h2><ul></ul></section>
+        <section class="total-amount-spent widget"><h2>Total Amount Spent</h2><ul></ul></section>
+      </section>
     </section>
-    <section class="agency-homepage hidden"></section>
+    <section class="agency-homepage hidden">
+      <section class="new-trip-requests widget"><h2>New Trip Requests</h2></section>
+      <section class="travelers-on-trips widget"><h2>Travelers On Trips</h2></section>
+      <section class="total-income widget"><h2>Total Income this Year</h2></section>
+    </section>
       
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
