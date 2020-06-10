@@ -25,5 +25,4 @@ export default class DataRepo {
   getDestinationForId(id) {
     return this.destinations.find(location => location.id === id)
   }
-
 }

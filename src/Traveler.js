@@ -7,6 +7,7 @@ class Traveler {
     this.travelerType = travelerData.travelerType
     this.type = UserTypeTraveler;
   }
+
   filterTripsFromId(trips, id) {
     if(typeof trips === 'object' && typeof id === 'number') {
       let allTrips = trips.filter(trip => trip.userID === id)
@@ -14,6 +15,7 @@ class Traveler {
     }
     return null
   }
+
   filterPastTrips(trips){
     let today = moment();
     if(typeof trips === 'object') {
@@ -24,6 +26,7 @@ class Traveler {
     }
     return null
   }
+
   filterActiveTrips(trips) {
     let today = moment();
     if(typeof trips === 'object') {
@@ -37,6 +40,7 @@ class Traveler {
     }
     return null
   }
+
   filterUpComingTrips(trips){
     let today = moment();
     if(typeof trips === 'object') {
@@ -47,6 +51,7 @@ class Traveler {
     }
     return null
   }
+
   filterPendingTrips(trips) {
     if(typeof trips === 'object') {
       let pendingTrips = trips.filter(trip => {
@@ -56,6 +61,7 @@ class Traveler {
     }
     return null
   }
+
   filterTravelerTrips(trips) {
     let allTrips = this.filterTripsFromId(trips, this.id)
     let pastTrips = this.filterPastTrips(allTrips);
@@ -70,9 +76,7 @@ class Traveler {
     }
     return result;
   }
-    /*
-    All of my trips (past, present, upcoming and pending)
-    */
+
    returnCostOfTrip(trip, destinations){
     let currentDestination = destinations.find(destination => destination.id === trip.destinationID);
     if(currentDestination === undefined) return 0

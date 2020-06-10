@@ -15,6 +15,7 @@ const agencyTotalIncomeSection = document.querySelector(".total-income ul")
 function getDestinationForId(id, destinations) {
   return destinations.find(location => location.id === id)
 }
+
 function getUserForId(id, users) {
   return users.find(user => user.id === id)
 }
@@ -23,23 +24,19 @@ export default {
   hideLogin() {
     loginBox.classList.toggle('hidden')
   },
+
   toggleTraveler() {
     travelerSection.classList.toggle('hidden')
     travelerGridSection.classList.toggle('grid', 'hidden')
     this.hideLogin()
   },
+
   toggleAgency() {
     agencySection.classList.toggle('hidden')
     agencySection.classList.toggle('grid')
     this.hideLogin();
   },
-  updateTravelerHomepage() {
-    
 
-  },
-  updateAgencyHomepage(){
-
-  },
   displayTravelersTrips(user, trips, destinations) {
     let travelerTrips = user.filterTravelerTrips(trips)
 
@@ -60,9 +57,11 @@ export default {
       this.displayTripForSection(trip, destination, travelerPresentTripSection)
     })
   },
+
   displayTripForSection(trip, destination, section) {
     section.innerHTML += `<li> ${(trip.date).split('/').reverse().join("-")}: ${destination.destination}</li> `;
   },
+
   displayAmountSpent(amount) {
     travelerAmountSpentSection.innerHTML += `<li>$${amount} including 10% ($${Math.round(amount * 0.1)}) for the Travel Agency</li>`
   },
@@ -78,10 +77,12 @@ export default {
       this.activeTripHtml(trip, destination, userData, agencyActiveTripsSection)
     })
   },
+
   activeTripHtml(trip, destination, user, section) {
     section.innerHTML += `<li> ${user.name} is in ${destination.destination}</li>`
     section.innerText += "\n"
   },
+
   displayTripRequests(trips, destinations, users) {
     trips.forEach(trip => {
       let userData = getUserForId(trip.userID, users)
@@ -89,9 +90,9 @@ export default {
       this.pendingRequestHtml(trip, destination, userData, agencyTripRequestsSection)
     })
   },
+
   pendingRequestHtml(trip, destination, user, section) {
     section.innerHTML += `<li> ${user.name} to ${destination.destination}</li>`
     section.innerText += "\n"
-
   }
 }

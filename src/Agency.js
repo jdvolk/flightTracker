@@ -4,6 +4,7 @@ class Agency {
   constructor() {
     this.type = UserTypeAgency
   }
+
   newTripRequests(trips) {
     if(typeof trips === 'object'){
       let result = trips.filter(trip => trip.status === 'pending')
@@ -11,6 +12,7 @@ class Agency {
     }
     return null
   }
+
   filterThisYearsTrips(trips) {
     let startOfYear = moment().startOf('year').format('YYYY-MM-DD')
     let tripsFromStartOfYear = trips.filter(trip => {
@@ -19,6 +21,7 @@ class Agency {
     })
     return tripsFromStartOfYear
   }
+
   returnCostOfTrip(trip, destinations){
     let currentDestination = destinations.find(destination => destination.id === trip.destinationID);
     if(currentDestination === undefined) return 0
@@ -26,6 +29,7 @@ class Agency {
     let costOfFlight =  currentDestination.estimatedFlightCostPerPerson * trip.travelers
     return costOfFlight + costOfLodge;
   }
+
   totalIncomeThisYear(trips, destinations) {
     let tripsFromStartOfYear = this.filterThisYearsTrips(trips);
     let result = tripsFromStartOfYear.reduce((totalSpent, trip) => {
@@ -33,6 +37,7 @@ class Agency {
     }, 0)
     return result * .1
   }
+
   filterTripsOnDate(trips, date) {
     if(typeof trips === 'object') {
       let filteredResult = trips.filter(trip => trip.date === date)
@@ -40,6 +45,7 @@ class Agency {
     }
     return null
   }
+
   activeTrips(trips) {
     let today = moment()
     let activeTrips = trips.filter(trip => {
@@ -50,6 +56,7 @@ class Agency {
     })
     return activeTrips
   }
+  
   travelersOnTripsToday(trips) {    
     if(typeof trips === 'object'){
       let activeTrips = this.activeTrips(trips)

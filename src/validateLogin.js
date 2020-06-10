@@ -30,6 +30,7 @@ const ifExists = async (id) => {
 
     return response.status === 200
 }
+
 const travelerData = async (id) => {
     const url = 'https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/'
     const response = await fetch(url + id)

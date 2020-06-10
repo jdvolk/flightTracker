@@ -16,7 +16,6 @@ import validateLogin from './validateLogin'
 import {Traveler, UserTypeTraveler} from './Traveler'
 import {Agency, UserTypeAgency} from './Agency'
 
-
 const form = document.querySelector('.login-form')
 const userName = document.querySelector('.user-name');
 const pass = document.querySelector('.pass');
@@ -47,6 +46,7 @@ function displayTravelerHomepage() {
   DomUpdates.displayTravelersTrips(user, dataRepo.trips, dataRepo.destinations)
   DomUpdates.displayAmountSpent(totalAmountSpent)
 }
+
 function displayAgencyHomepage() {
   let amountEarned = user.totalIncomeThisYear(dataRepo.trips, dataRepo.destinations)
   let newTripRequests = user.newTripRequests(dataRepo.trips)
@@ -54,6 +54,5 @@ function displayAgencyHomepage() {
   DomUpdates.displayAgencyAmountEarned(amountEarned)
   DomUpdates.displayActiveTrips(travelersOnTrips, dataRepo.destinations, dataRepo.travelers)
   DomUpdates.displayTripRequests(newTripRequests, dataRepo.destinations, dataRepo.travelers)
-
 }
 
