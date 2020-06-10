@@ -1,8 +1,8 @@
 export default class DataRepo {
   constructor() {
-    this.travelers;
-    this.trips;
-    this.destinations
+    this.travelers = null;
+    this.trips = null;
+    this.destinations = null
   }
 
   async getData(data) {
@@ -20,6 +20,10 @@ export default class DataRepo {
     this.travelers = travelers.travelers;
     this.trips = trips.trips;
     this.destinations = destinations.destinations;
+  }
+
+  getDestinationForId(id) {
+    return this.destinations.find(location => location.id === id)
   }
 
 }

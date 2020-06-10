@@ -16,31 +16,44 @@ import validateLogin from './validateLogin'
 import {Traveler, UserTypeTraveler} from './Traveler'
 import {Agency, UserTypeAgency} from './Agency'
 
-const loginButton = document.querySelector('.login');
-let form = document.querySelector('.login-form')
-let userName = document.querySelector('.user-name');
-let pass = document.querySelector('.pass');
 
-// let login, traveler,agency, dataRepo, domUpdates;
+const form = document.querySelector('.login-form')
+const userName = document.querySelector('.user-name');
+const pass = document.querySelector('.pass');
+const dataRepo = new DataRepo()
 
+form.addEventListener('submit', login)
 
-loginButton.addEventListener('click', login)
+let user;
 
 async function login(event) {
-  // DataRepo.getAllData();
   event.preventDefault();
-  let user = await validateLogin(userName.value, pass.value);
-  // trigger class of hidden on login page 
+  await dataRepo.getAllData();
+  user = await validateLogin(userName.value, pass.value);
   if(user.type === UserTypeTraveler) {
-    // trigger hope page if user is traveler
     DomUpdates.toggleTraveler()
-    DomUpdates.hideLogin()
+    displayTravelerHomepage();
   } else if (user.type === UserTypeAgency) {
-    // trigger home page if user is agency
     DomUpdates.toggleAgency();
-    DomUpdates.hideLogin()
+    displayAgencyHomepage()
   } else {
-    // error for failed login
+    throw "Invalid Username and Password"
     console.log('error')
   }
 }
+
+function displayTravelerHomepage() {
+  let totalAmountSpent = user.returnTotalAmountSpent(dataRepo.trips, dataRepo.destinations);
+  DomUpdates.displayTravelersTrips(user, dataRepo.trips, dataRepo.destinations)
+  DomUpdates.displayAmountSpent(totalAmountSpent)
+}
+function displayAgencyHomepage() {
+  let amountEarned = user.totalIncomeThisYear(dataRepo.trips, dataRepo.destinations)
+  let newTripRequests = user.newTripRequests(dataRepo.trips)
+  let travelersOnTrips = user.activeTrips(dataRepo.trips)
+  DomUpdates.displayAgencyAmountEarned(amountEarned)
+  DomUpdates.displayActiveTrips(travelersOnTrips, dataRepo.destinations, dataRepo.travelers)
+  DomUpdates.displayTripRequests(newTripRequests, dataRepo.destinations, dataRepo.travelers)
+
+}
+

@@ -3,6 +3,7 @@ import {Agency, UserTypeAgency} from './Agency'
 
 const validateLogin = async (username, password) => {
   let isPassword = password === "travel2020"
+  if(!isPassword) alert("Invalid Username or Password")
   let id = getId(username);
   if(typeof id === "number") {
     let exists = await ifExists(id)
@@ -12,7 +13,8 @@ const validateLogin = async (username, password) => {
     if(id === 'agency') {
       return new Agency()
     } else {
-      return new Traveler()
+      let traveler = new Traveler(await travelerData(id))
+      return traveler
     }
   }
 }
@@ -27,5 +29,12 @@ const ifExists = async (id) => {
     const response = await fetch(url + id)
 
     return response.status === 200
+}
+const travelerData = async (id) => {
+    const url = 'https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/'
+    const response = await fetch(url + id)
+    const json = await response.json()
+
+    return json
 }
 export default validateLogin
